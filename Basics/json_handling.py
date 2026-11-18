@@ -69,18 +69,37 @@ def save_config(config):
 
 
 
-#Exercise 4: Learning json.load() method
+#Exercise 4,5 and 6: Learning json.load() method + addding a try/except to handle excpetions + Checking result before using them
 def load_config():
-    with open("config.json", "r", encoding="utf-8") as file:
-        result = json.load(file)
+    try:
+        with open("config.json", "r", encoding="utf-8") as file:
+            result = json.load(file)
 
-    return result
+        return result
+    except (FileNotFoundError,json.JSONDecodeError):
+        return None
 
 config = load_config()
+if config is not None:
+    print(config["model"])
+    print(config["temperature"])
+    print(type(config))
+else:
+    print("Configuration could not be loaded")
 
-print(config["model"])
-print(config["temperature"])
-print(type(config))
 
-#Exercise 5: Exception handling
+#Exercise 6: Accesing an incomplete dictionary
+
+config_incomplete = {
+    "model": "gpt-example",
+    "temperature": 0.7
+}
+
+def get_max_tokens(config_incomplete):
+    max_tokens = config_incomplete.get("max_tokens",1000)
+
+    return max_tokens
+
+print(get_max_tokens(config_incomplete))
+   
 
