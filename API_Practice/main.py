@@ -1,4 +1,5 @@
 import requests
+from api_client import get_post,create_post,update_post,delete_post
 
 
 # First HTTP request
@@ -119,6 +120,16 @@ def delete_post(post_id):
         return True
     except requests.exceptions.RequestException:
         return False
+
+# Testing api_client methods on main
+
+if __name__ == "__main__":
+    print(get_post(1))
+    print(create_post("My first post", "Learning Python APIs", 1))
+    print(update_post(1,"Testing title", "body", 1))  
+    print(delete_post(1))
+
+
 
 
 
